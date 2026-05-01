@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Details</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>🤖 Refer & Earn Bot</h2>
+            <div>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/users">Users</a>
+                <a href="/withdrawals">Withdrawals</a>
+                <a href="/channels">Channels</a>
+                <a href="/broadcast">Broadcast</a>
+                <a href="/settings">Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+        <h1>👤 User: <%= user.firstName %></h1>
+        <p><strong>ID:</strong> <%= user.telegramId %></p>
+        <p><strong>Balance:</strong> ₹<%= user.balance %></p>
+        <p><strong>Refers:</strong> <%= user.referCount || 0 %></p>
+        <p><strong>Status:</strong> <%= user.banned ? 'Banned' : 'Active' %></p>
+        
+        <h3>Actions</h3>
+        <form method="POST" action="/user/addbalance" style="display:inline-block">
+            <input type="hidden" name="userId" value="<%= user.telegramId %>">
+            <input type="number" name="amount" step="0.01" placeholder="Amount" required>
+            <button type="submit">Add Balance</button>
+        </form>
+        <form method="POST" action="/user/toggleban" style="display:inline-block">
+            <input type="hidden" name="userId" value="<%= user.telegramId %>">
+            <button type="submit"><%= user.banned ? 'Unban' : 'Ban' %></button>
+        </form>
+        
+        <h3>Withdrawal History</h3>
+        <table border="1">
+            <thead><tr><th>Date</th><th>Amount</th><th>UPI</th><th>Status</th></tr></thead>
+            <tbody>
+                <% withdrawals.forEach(w => { %>
+                <tr><td><%= new Date(w.createdAt).toLocaleString() %></td><td>₹<%= w.amount %></td><td><%= w.upiId %></td><td><%= w.status %></td></tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
