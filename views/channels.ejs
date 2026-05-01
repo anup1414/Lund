@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Channels</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>🤖 Refer & Earn Bot</h2>
+            <div>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/users">Users</a>
+                <a href="/withdrawals">Withdrawals</a>
+                <a href="/channels">Channels</a>
+                <a href="/broadcast">Broadcast</a>
+                <a href="/settings">Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+        <h1>📢 Channel Management</h1>
+        
+        <h3>Add New Channel</h3>
+        <form method="POST" action="/channels/add">
+            <input type="text" name="channelId" placeholder="Channel ID (@username or -100...)" required>
+            <input type="text" name="link" placeholder="Invite Link" required>
+            <input type="text" name="name" placeholder="Display Name" required>
+            <label><input type="checkbox" name="isPrivate"> Private Channel</label>
+            <button type="submit">Add Channel</button>
+        </form>
+        
+        <h3>Active Channels</h3>
+        <table border="1">
+            <thead><tr><th>Name</th><th>ID</th><th>Link</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+                <% channels.forEach(ch => { %>
+                <tr>
+                    <td><%= ch.name %></td>
+                    <td><%= ch.channelId %></td>
+                    <td><a href="<%= ch.link %>" target="_blank">Join</a></td>
+                    <td><%= ch.isActive ? '✅ Active' : '❌ Inactive' %></td>
+                    <td>
+                        <form method="POST" action="/channels/toggle" style="display:inline-block">
+                            <input type="hidden" name="channelId" value="<%= ch._id %>">
+                            <input type="hidden" name="isActive" value="<%= !ch.isActive %>">
+                            <button type="submit"><%= ch.isActive ? 'Disable' : 'Enable' %></button>
+                        </form>
+                        <form method="POST" action="/channels/delete" style="display:inline-block">
+                            <input type="hidden" name="channelId" value="<%= ch._id %>">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        
+        <h3>Test User Verification</h3>
+        <form method="POST" action="/channels/test">
+            <input type="text" name="userId" placeholder="User Telegram ID" required>
+            <button type="submit">Test</button>
+        </form>
+    </div>
+</body>
+</html>
