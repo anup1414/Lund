@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>🤖 Refer & Earn Bot</h2>
+            <div>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/users">Users</a>
+                <a href="/withdrawals">Withdrawals</a>
+                <a href="/channels">Channels</a>
+                <a href="/broadcast">Broadcast</a>
+                <a href="/settings">Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+        <h1>👥 Users List</h1>
+        <form method="GET" style="margin-bottom:20px;">
+            <input type="text" name="search" placeholder="Search by ID or name" value="<%= search %>">
+            <button type="submit">Search</button>
+        </form>
+        <table border="1">
+            <thead><tr><th>ID</th><th>Name</th><th>Balance</th><th>Refers</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.telegramId %></td>
+                    <td><%= user.firstName %></td>
+                    <td>₹<%= user.balance %></td>
+                    <td><%= user.referCount || 0 %></td>
+                    <td><%= user.banned ? '❌ Banned' : '✅ Active' %></td>
+                    <td><a href="/user/<%= user.telegramId %>">View</a></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
