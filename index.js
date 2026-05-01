@@ -79,7 +79,7 @@ async function mainMenu(referCode) {
       [{ text: '💰 Balance', callback_data: 'balance' }, { text: '🔗 Refer Link', callback_data: 'refer' }],
       [{ text: '💸 Withdraw', callback_data: 'withdraw' }, { text: '📊 Status', callback_data: 'status' }],
       [{ text: '🏆 Leaderboard', callback_data: 'leaderboard' }, { text: '📜 History', callback_data: 'history' }],
-      [{ text: '🆘 Support', url: 'https://t.me/YourSupportUsername' }]
+      [{ text: '🆘 Support', url: 'https://t.me/gunman_000' }]
     ]
   };
 }
