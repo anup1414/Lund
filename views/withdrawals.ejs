@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Withdrawals</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>🤖 Refer & Earn Bot</h2>
+            <div>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/users">Users</a>
+                <a href="/withdrawals">Withdrawals</a>
+                <a href="/channels">Channels</a>
+                <a href="/broadcast">Broadcast</a>
+                <a href="/settings">Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+        <h1>💸 Withdrawals</h1>
+        <div><a href="?status=pending">Pending</a> | <a href="?status=paid">Paid</a> | <a href="?status=rejected">Rejected</a></div>
+        <table border="1">
+            <thead><tr><th>Date</th><th>User ID</th><th>Amount</th><th>UPI</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+                <% withdrawals.forEach(w => { %>
+                <tr>
+                    <td><%= new Date(w.createdAt).toLocaleString() %></td>
+                    <td><%= w.userId %></td>
+                    <td>₹<%= w.amount %></td>
+                    <td><%= w.upiId %></td>
+                    <td><%= w.status %></td>
+                    <td>
+                        <% if (w.status === 'pending') { %>
+                        <form method="POST" action="/withdraw/approve" style="display:inline-block">
+                            <input type="hidden" name="withdrawalId" value="<%= w._id %>">
+                            <input type="hidden" name="userId" value="<%= w.userId %>">
+                            <input type="hidden" name="amount" value="<%= w.amount %>">
+                            <button type="submit">Approve</button>
+                        </form>
+                        <form method="POST" action="/withdraw/reject" style="display:inline-block">
+                            <input type="hidden" name="withdrawalId" value="<%= w._id %>">
+                            <input type="hidden" name="userId" value="<%= w.userId %>">
+                            <input type="hidden" name="amount" value="<%= w.amount %>">
+                            <button type="submit">Reject</button>
+                        </form>
+                        <% } %>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
