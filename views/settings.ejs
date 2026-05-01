@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>🤖 Refer & Earn Bot</h2>
+            <div>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/users">Users</a>
+                <a href="/withdrawals">Withdrawals</a>
+                <a href="/channels">Channels</a>
+                <a href="/broadcast">Broadcast</a>
+                <a href="/settings">Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+        <h1>⚙️ Bot Settings</h1>
+        <form method="POST" action="/settings/update">
+            <p>Welcome Bonus (₹): <input type="number" name="welcome_bonus" step="0.01" value="<%= welcomeBonus %>"></p>
+            <p>Refer Bonus (₹): <input type="number" name="refer_bonus" step="0.01" value="<%= referBonus %>"></p>
+            <p>Min Withdrawal (₹): <input type="number" name="min_withdraw" step="0.01" value="<%= minWithdraw %>"></p>
+            <p>Welcome Message:<br><textarea name="welcome_message" rows="6" cols="60"><%= welcomeMessage %></textarea></p>
+            <button type="submit">Save Settings</button>
+        </form>
+    </div>
+</body>
+</html>
