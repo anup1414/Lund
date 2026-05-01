@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Broadcast</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>🤖 Refer & Earn Bot</h2>
+            <div>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/users">Users</a>
+                <a href="/withdrawals">Withdrawals</a>
+                <a href="/channels">Channels</a>
+                <a href="/broadcast">Broadcast</a>
+                <a href="/settings">Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+        <h1>📢 Broadcast Message</h1>
+        <form method="POST" action="/broadcast/send">
+            <textarea name="message" rows="8" cols="80" placeholder="Type your message here... Supports Markdown"></textarea><br>
+            <button type="submit">Send to All Users</button>
+        </form>
+        <p>⚠️ This will send message to ALL active users!</p>
+    </div>
+</body>
+</html>
